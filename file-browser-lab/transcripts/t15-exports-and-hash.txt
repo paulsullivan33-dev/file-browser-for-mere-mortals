@@ -1,0 +1,33 @@
+$ pgrep -af filebrowser   # nothing — the server is stopped
+69547 /bin/bash --norc --noprofile -c umask 0007; W=~/workspace/file-browser-lab-work; B=$W/bin/filebrowser; DB=$W/filebrowser.db T=~/workspace/file-browser-for-mere-mortals/file-browser-lab/transcripts pkill -f "filebrowser -d $DB"; sleep 1 { echo '$ pgrep -af filebrowser   # nothing ??? the server is stopped' pgrep -af "filebrowser -d" || echo "(no server process)" echo '$ ls -la filebrowser.db   # the whole database is one file' ls -la $DB echo '$ filebrowser hash lab-alice-pass   # passwords are stored as bcrypt hashes, never in plain text' $B hash lab-alice-pass echo '$ filebrowser config export config-export.json -d filebrowser.db' $B config export $W/config-export.json -d $DB 2>&1 | grep -v "No config file\|Using database" echo '$ head -c 400 config-export.json' head -c 400 $W/config-export.json; echo echo '$ filebrowser users export users-export.json -d filebrowser.db' $B users export $W/users-export.json -d $DB 2>&1 | grep -v "No config file\|Using database" echo '$ python3 ??? usernames, scopes and permission sets from users-export.json (passwords are hashes)' python3 -c " import json for u in json.load(open('$W/users-export.json')):     print(u['username'], '| scope:', u['scope'], '| password begins:', u['password'][:7], '| admin:', u['perm']['admin'])" echo '$ filebrowser users ls -d filebrowser.db   # the final state of the lab' $B users ls -d $DB 2>&1 | grep -v "No config file\|Using database" } 2>&1 | tee $T/t15-exports-and-hash.txt
+69552 /bin/bash --norc --noprofile -c umask 0007; W=~/workspace/file-browser-lab-work; B=$W/bin/filebrowser; DB=$W/filebrowser.db T=~/workspace/file-browser-for-mere-mortals/file-browser-lab/transcripts pkill -f "filebrowser -d $DB"; sleep 1 { echo '$ pgrep -af filebrowser   # nothing ??? the server is stopped' pgrep -af "filebrowser -d" || echo "(no server process)" echo '$ ls -la filebrowser.db   # the whole database is one file' ls -la $DB echo '$ filebrowser hash lab-alice-pass   # passwords are stored as bcrypt hashes, never in plain text' $B hash lab-alice-pass echo '$ filebrowser config export config-export.json -d filebrowser.db' $B config export $W/config-export.json -d $DB 2>&1 | grep -v "No config file\|Using database" echo '$ head -c 400 config-export.json' head -c 400 $W/config-export.json; echo echo '$ filebrowser users export users-export.json -d filebrowser.db' $B users export $W/users-export.json -d $DB 2>&1 | grep -v "No config file\|Using database" echo '$ python3 ??? usernames, scopes and permission sets from users-export.json (passwords are hashes)' python3 -c " import json for u in json.load(open('$W/users-export.json')):     print(u['username'], '| scope:', u['scope'], '| password begins:', u['password'][:7], '| admin:', u['perm']['admin'])" echo '$ filebrowser users ls -d filebrowser.db   # the final state of the lab' $B users ls -d $DB 2>&1 | grep -v "No config file\|Using database" } 2>&1 | tee $T/t15-exports-and-hash.txt
+$ ls -la filebrowser.db   # the whole database is one file
+-rw-r----- 1 root root 65536 Oct 29 18:44 /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+$ filebrowser hash lab-alice-pass   # passwords are stored as bcrypt hashes, never in plain text
+$2a$10$Oc0KPLSbFyIdlGoSuxFi8.fzxDazs0CVhQoUNolHs1ibH1AUYcHzK
+$ filebrowser config export config-export.json -d filebrowser.db
+$ head -c 400 config-export.json
+{
+    "settings": {
+        "key": "ubbKPCWhq2V9btdNUizaMubnUKNOoHROT3Amu/j6FsSIK/pVOMZw302QC6MMBXbMfytZC1/q8uyKUy0sqaNWyg==",
+        "signup": false,
+        "hideLoginButton": false,
+        "createUserDir": false,
+        "userHomeBasePath": "/users",
+        "defaults": {
+            "scope": ".",
+            "locale": "en",
+            "viewMode": "list",
+            "singleClick": false,
+  
+$ filebrowser users export users-export.json -d filebrowser.db
+$ python3 — usernames, scopes and permission sets from users-export.json (passwords are hashes)
+admin | scope: / | password begins: $2a$10$ | admin: True
+alice | scope: /alice | password begins: $2a$10$ | admin: False
+$ filebrowser users ls -d filebrowser.db   # the final state of the lab
+ID  Username  Scope   Locale  V. Mode  S.Click  Red. After C/M  Admin  Execute  Create  Rename  Modify  Delete  Share  Download  Pwd Lock
+1   admin     /       en      list     false    false           true   true     true    true    true    true    true   true      false  
+2   alice     /alice  en      list     false    false           false  false    true    true    true    false   true   true      false  
+$ curl -s http://127.0.0.1:18080/  (nothing answers — the server really is stopped)
+HTTP 000
+connection refused

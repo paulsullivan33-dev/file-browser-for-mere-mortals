@@ -1,0 +1,14 @@
+$ (server restarted; admin logged in again)
+$ curl -s -X POST --data-binary @recipes-upload.txt "http://127.0.0.1:18080/api/resources/recipes/tomato-sauce.txt" -H "X-Auth: $ADMIN" -w "HTTP %{http_code}"
+200 OK
+HTTP 200
+$ cat hook.log   # written by the after_upload hook, not by us
+hook fired for {FILE} (user {USERNAME}, trigger {TRIGGER})
+$ filebrowser cmds rm after_upload 0 -d filebrowser.db
+$ filebrowser cmds add after_upload 'echo "hook fired for $FILE (user $USERNAME, trigger $TRIGGER, scope $SCOPE)" >> <lab>/hook2.log'
+after_upload(0): echo "hook fired for $FILE (user $USERNAME, trigger $TRIGGER, scope $SCOPE)" >> /home/hatch/workspace/file-browser-lab-work/hook2.log
+$ curl -s -X POST --data-binary @recipes-upload.txt "http://127.0.0.1:18080/api/resources/recipes/herb-oil.txt" -H "X-Auth: $ADMIN" -w "HTTP %{http_code}"
+200 OK
+HTTP 200
+$ cat hook2.log
+hook fired for /home/hatch/workspace/file-browser-lab-work/root/recipes/herb-oil.txt (user admin, trigger after_upload, scope /)

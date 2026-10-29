@@ -1,0 +1,19 @@
+$ head -c 49152 /dev/urandom > roundtrip.bin; sha256sum roundtrip.bin
+88354b7753dd13fcf6f74aca7e0d70920bcedcb74309a7b0614e0eeae6857995  /home/hatch/workspace/file-browser-lab-work/roundtrip.bin
+$ curl -s -X POST --data-binary @roundtrip.bin "http://127.0.0.1:18080/api/resources/documents/roundtrip.bin" -H "X-Auth: $TOKEN" -w "HTTP %{http_code}"
+200 OK
+HTTP 200
+$ ls -la root/documents/
+total 120
+drwxrwx--- 1 root root   122 Oct 29 18:41 .
+drwxrwx--- 1 root root    54 Oct 29 18:40 ..
+-rw-rw---- 1 root root   261 Oct 29 18:40 field-notes.md
+-rw-rw---- 1 root root   235 Oct 29 18:40 picnic-supplies.txt
+-rw-r----- 1 root root 49152 Oct 29 18:41 roundtrip.bin
+-rw-rw---- 1 root root 65536 Oct 29 18:40 sample-data.bin
+$ curl -s "http://127.0.0.1:18080/api/raw/documents/roundtrip.bin" -H "X-Auth: $TOKEN" -o downloaded.bin; sha256sum downloaded.bin
+88354b7753dd13fcf6f74aca7e0d70920bcedcb74309a7b0614e0eeae6857995  /home/hatch/workspace/file-browser-lab-work/downloaded.bin
+$ cmp roundtrip.bin downloaded.bin && echo IDENTICAL
+IDENTICAL
+$ curl -s "http://127.0.0.1:18080/api/raw/documents/sample-data.bin" -H "X-Auth: $TOKEN" -o sample-back.bin; cmp sample-back.bin root/documents/sample-data.bin && echo IDENTICAL
+IDENTICAL

@@ -1,0 +1,19 @@
+$ curl -s -X POST http://127.0.0.1:18080/api/users -H "X-Auth: $TOKEN" -d <alice JSON: scope /alice, no admin, no execute, no delete>
+400 Bad Request (the current password is incorrect)
+HTTP 400
+$ curl -s http://127.0.0.1:18080/api/users -H "X-Auth: $TOKEN"
+1 admin scope: / perm: {'admin': True, 'execute': True, 'create': True, 'rename': True, 'modify': True, 'delete': True, 'share': True, 'download': True}
+$ retry with the admin current password included in the request body
+400 Bad Request (the current password is incorrect)
+HTTP 400
+$ curl -s http://127.0.0.1:18080/api/users -H "X-Auth: $TOKEN"
+1 admin scope: / perm: {'admin': True, 'execute': True, 'create': True, 'rename': True, 'modify': True, 'delete': True, 'share': True, 'download': True}
+$ retry with "current_password" (snake_case, the field the handler actually reads)
+201 Created
+HTTP 201
+$ curl -s http://127.0.0.1:18080/api/users -H "X-Auth: $TOKEN"
+1 admin scope: / perm: {'admin': True, 'execute': True, 'create': True, 'rename': True, 'modify': True, 'delete': True, 'share': True, 'download': True}
+2 alice scope: /alice perm: {'admin': False, 'execute': False, 'create': True, 'rename': True, 'modify': True, 'delete': False, 'share': True, 'download': True}
+2026/10/29 18:41:21 /api/users: 400 127.0.0.1 the current password is incorrect
+2026/10/29 18:41:31 /api/users: 400 127.0.0.1 the current password is incorrect
+2026/10/29 18:41:51 user: alice, home dir: [/alice].

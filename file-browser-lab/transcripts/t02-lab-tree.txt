@@ -1,0 +1,12 @@
+$ mkdir -p root/documents root/photos root/recipes root/alice
+$ find root -type f | sort
+/home/hatch/workspace/file-browser-lab-work/root/alice/seed-swap.txt
+/home/hatch/workspace/file-browser-lab-work/root/alice/welcome.txt
+/home/hatch/workspace/file-browser-lab-work/root/documents/field-notes.md
+/home/hatch/workspace/file-browser-lab-work/root/documents/picnic-supplies.txt
+/home/hatch/workspace/file-browser-lab-work/root/documents/sample-data.bin
+/home/hatch/workspace/file-browser-lab-work/root/photos/captions.txt
+/home/hatch/workspace/file-browser-lab-work/root/recipes/flatbread.txt
+/home/hatch/workspace/file-browser-lab-work/root/recipes/lentil-soup.txt
+$ sha256sum root/documents/sample-data.bin
+23d4f8819df95219b1d05c8c9451914fd558f3bbf79509ca4203b7fe8d839719  /home/hatch/workspace/file-browser-lab-work/root/documents/sample-data.bin

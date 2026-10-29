@@ -1,0 +1,26 @@
+site_name: File Browser for Mere Mortals
+site_description: A web file manager that runs on your own server. Serving one folder tree through the browser with per-user scopes and permissions, share links with passwords and revocation, and a command runner that stays off until you switch it on, with the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/file-browser-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What File Browser Is: what-file-browser-is.md
+  - The Moving Parts: the-moving-parts.md
+  - Installing File Browser: installing-file-browser.md
+  - Your First Login: your-first-login.md
+  - Working with Files: working-with-files.md
+  - Users, Permissions and Scopes: users-and-scopes.md
+  - Sharing Links: sharing-links.md
+  - The Command Runner: the-command-runner.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

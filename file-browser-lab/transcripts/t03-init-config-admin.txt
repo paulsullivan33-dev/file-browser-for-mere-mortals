@@ -1,0 +1,224 @@
+$ filebrowser config init -d filebrowser.db
+2026/10/29 18:40:34 No config file used
+2026/10/29 18:40:34 Using database: /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+
+Congratulations! You've set up your database to use with File Browser.
+Now add your first user via 'filebrowser users add' and then you just
+need to call the main command to boot up the server.
+Sign up:                  false
+Hide Login Button:        false
+Create User Dir:          false
+Logout Page:              
+Minimum Password Length:  12
+Auth Method:              json
+Shell:                      
+
+Branding:
+  Name:                                
+  Files override:                      
+  Disable external links:              false
+  Disable used disk percentage graph:  false
+  Color:                               
+  Theme:                               
+
+Server:
+  Log:                       stdout
+  Port:                      8080
+  Base URL:                  
+  Root:                      .
+  Socket:                    
+  Address:                   127.0.0.1
+  TLS Cert:                  
+  TLS Key:                   
+  Token Expiration Time:     2h
+  Exec Enabled:              false
+  Thumbnails Enabled:        true
+  Resize Preview:            true
+  Type Detection by Header:  true
+  Follow External Symlinks:  false
+
+TUS:
+  Chunk size:   10485760
+  Retry count:  5
+
+Defaults:
+  Scope:                                 .
+  DateFormat:                            false
+  HideDotfiles:                          false
+  Locale:                                en
+  View mode:                             list
+  Single Click:                          false
+  Redirect after Copy/Move:              false
+  File Creation Mode:                    0o640
+  Directory Creation Mode:               0o750
+  Commands:                              
+  Ace editor syntax highlighting theme:  
+  Sorting:
+    By:   name
+    Asc:  false
+  Permissions:
+    Admin:     false
+    Execute:   true
+    Create:    true
+    Rename:    true
+    Modify:    true
+    Delete:    true
+    Share:     true
+    Download:  true
+
+Auther configuration (raw):
+
+{
+  "recaptcha": null
+}
+
+$ filebrowser config set -d filebrowser.db --root <lab>/root --address 127.0.0.1 --port 18080
+2026/10/29 18:40:34 No config file used
+2026/10/29 18:40:34 Using database: /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+Sign up:                  false
+Hide Login Button:        false
+Create User Dir:          false
+Logout Page:              /login
+Minimum Password Length:  12
+Auth Method:              json
+Shell:                      
+
+Branding:
+  Name:                                
+  Files override:                      
+  Disable external links:              false
+  Disable used disk percentage graph:  false
+  Color:                               
+  Theme:                               
+
+Server:
+  Log:                       stdout
+  Port:                      18080
+  Base URL:                  
+  Root:                      /home/hatch/workspace/file-browser-lab-work/root
+  Socket:                    
+  Address:                   127.0.0.1
+  TLS Cert:                  
+  TLS Key:                   
+  Token Expiration Time:     2h
+  Exec Enabled:              false
+  Thumbnails Enabled:        true
+  Resize Preview:            true
+  Type Detection by Header:  true
+  Follow External Symlinks:  false
+
+TUS:
+  Chunk size:   10485760
+  Retry count:  5
+
+Defaults:
+  Scope:                                 .
+  DateFormat:                            false
+  HideDotfiles:                          false
+  Locale:                                en
+  View mode:                             list
+  Single Click:                          false
+  Redirect after Copy/Move:              false
+  File Creation Mode:                    0o640
+  Directory Creation Mode:               0o750
+  Commands:                              
+  Ace editor syntax highlighting theme:  
+  Sorting:
+    By:   name
+    Asc:  false
+  Permissions:
+    Admin:     false
+    Execute:   true
+    Create:    true
+    Rename:    true
+    Modify:    true
+    Delete:    true
+    Share:     true
+    Download:  true
+
+Auther configuration (raw):
+
+{
+  "recaptcha": null
+}
+
+$ filebrowser users add admin lab-admin-pass --perm.admin -d filebrowser.db
+2026/10/29 18:40:35 No config file used
+2026/10/29 18:40:35 Using database: /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+ID  Username  Scope  Locale  V. Mode  S.Click  Red. After C/M  Admin  Execute  Create  Rename  Modify  Delete  Share  Download  Pwd Lock
+1   admin     /      en      list     false    false           true   true     true    true    true    true    true   true      false  
+$ filebrowser users ls -d filebrowser.db
+2026/10/29 18:40:35 No config file used
+2026/10/29 18:40:35 Using database: /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+ID  Username  Scope  Locale  V. Mode  S.Click  Red. After C/M  Admin  Execute  Create  Rename  Modify  Delete  Share  Download  Pwd Lock
+1   admin     /      en      list     false    false           true   true     true    true    true    true    true   true      false  
+$ filebrowser config cat -d filebrowser.db
+2026/10/29 18:40:35 No config file used
+2026/10/29 18:40:35 Using database: /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+Sign up:                  false
+Hide Login Button:        false
+Create User Dir:          false
+Logout Page:              /login
+Minimum Password Length:  12
+Auth Method:              json
+Shell:                      
+
+Branding:
+  Name:                                
+  Files override:                      
+  Disable external links:              false
+  Disable used disk percentage graph:  false
+  Color:                               
+  Theme:                               
+
+Server:
+  Log:                       stdout
+  Port:                      18080
+  Base URL:                  
+  Root:                      /home/hatch/workspace/file-browser-lab-work/root
+  Socket:                    
+  Address:                   127.0.0.1
+  TLS Cert:                  
+  TLS Key:                   
+  Token Expiration Time:     2h
+  Exec Enabled:              false
+  Thumbnails Enabled:        true
+  Resize Preview:            true
+  Type Detection by Header:  true
+  Follow External Symlinks:  false
+
+TUS:
+  Chunk size:   10485760
+  Retry count:  5
+
+Defaults:
+  Scope:                                 .
+  DateFormat:                            false
+  HideDotfiles:                          false
+  Locale:                                en
+  View mode:                             list
+  Single Click:                          false
+  Redirect after Copy/Move:              false
+  File Creation Mode:                    0o640
+  Directory Creation Mode:               0o750
+  Commands:                              
+  Ace editor syntax highlighting theme:  
+  Sorting:
+    By:   name
+    Asc:  false
+  Permissions:
+    Admin:     false
+    Execute:   true
+    Create:    true
+    Rename:    true
+    Modify:    true
+    Delete:    true
+    Share:     true
+    Download:  true
+
+Auther configuration (raw):
+
+{
+  "recaptcha": null
+}
+

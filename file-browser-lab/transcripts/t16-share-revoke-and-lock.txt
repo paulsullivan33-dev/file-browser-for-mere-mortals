@@ -1,0 +1,14 @@
+$ timeout 8 filebrowser users ls -d filebrowser.db   # while the server is running
+2026/10/29 18:45:34 No config file used
+2026/10/29 18:45:34 Using database: /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+Error: timeout
+(exit 1)
+$ curl -s -X DELETE "http://127.0.0.1:18080/api/share/wIr1z2i3" -H "X-Auth: $ADMIN" -w "HTTP %{http_code}"   # revoke the picnic share
+200 OK
+HTTP 200
+$ curl -s "http://127.0.0.1:18080/api/public/share/wIr1z2i3" -w "HTTP %{http_code}"   # the link is dead now
+404 Not Found
+
+HTTP 404
+$ curl -s "http://127.0.0.1:18080/api/shares" -H "X-Auth: $ADMIN"   # only the password share remains
+[{"hash":"gfdqREe6","path":"/recipes/lentil-soup.txt","userID":1,"expire":0,"hasPassword":true}]

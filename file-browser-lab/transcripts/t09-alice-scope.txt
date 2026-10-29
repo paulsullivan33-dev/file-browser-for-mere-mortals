@@ -1,0 +1,38 @@
+$ alice logs in (token: 605 characters)
+$ curl -s http://127.0.0.1:18080/api/resources/ -H "X-Auth: $ALICE"   # her root — the whole of her world
+path: / | items: ['seed-swap.txt', 'welcome.txt']
+$ curl -s http://127.0.0.1:18080/api/resources/documents/ -H "X-Auth: $ALICE" -w "HTTP %{http_code}"   # the real documents folder, by its server path
+404 Not Found
+HTTP 404
+$ curl -s "http://127.0.0.1:18080/api/raw/documents/picnic-supplies.txt" -H "X-Auth: $ALICE" -w "HTTP %{http_code}"   # download attempt outside her scope
+HTTP 404
+$ curl -s "http://127.0.0.1:18080/api/resources/../documents/" -H "X-Auth: $ALICE" -w "HTTP %{http_code}"   # dot-dot escape attempt
+HTTP 301
+$ curl -s "http://127.0.0.1:18080/api/resources/%2e%2e%2fdocuments/" -H "X-Auth: $ALICE" -w "HTTP %{http_code}"   # encoded dot-dot attempt
+HTTP 301
+$ curl -s -X DELETE "http://127.0.0.1:18080/api/resources/welcome.txt" -H "X-Auth: $ALICE" -w "HTTP %{http_code}"   # her own file, but Delete permission is off
+403 Forbidden
+HTTP 403
+$ curl -s http://127.0.0.1:18080/api/users -H "X-Auth: $ALICE" -w "HTTP %{http_code}"   # user administration is admin-only
+HTTP 403
+$ ls root/alice/   # welcome.txt survived the delete attempt
+seed-swap.txt
+welcome.txt
+$ curl -sL --path-as-is "http://127.0.0.1:18080/api/resources/../documents/" -H "X-Auth: $ALICE" -w "final HTTP %{http_code}"   # following the redirect
+final HTTP 200
+$ curl -s --path-as-is -o /dev/null -D - "http://127.0.0.1:18080/api/resources/../documents/" -H "X-Auth: $ALICE" | grep -i "^location"
+Location: /api/documents/
+$ curl -s "http://127.0.0.1:18080/api/documents/" -H "X-Auth: $ALICE" | head -c 200
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, in
+# It is the web UI shell page (the single-page app), not file data:
+$ curl -s "http://127.0.0.1:18080/api/documents/" -H "X-Auth: $ALICE" | grep -o "<title>" -A 2 | head -4
+    <title>
+      File Browser
+    </title>

@@ -1,0 +1,29 @@
+$ curl -s -X POST "http://127.0.0.1:18080/api/resources/documents/shopping/" -H "X-Auth: $TOKEN" -w "HTTP %{http_code}"   # trailing slash creates a folder
+200 OK
+HTTP 200
+$ ls root/documents/
+field-notes.md
+picnic-supplies.txt
+roundtrip.bin
+sample-data.bin
+shopping
+$ curl -s -X PATCH "http://127.0.0.1:18080/api/resources/documents/roundtrip.bin?action=rename&destination=/documents/roundtrip-renamed.bin" -H "X-Auth: $TOKEN" -w "HTTP %{http_code}"
+200 OK
+HTTP 200
+$ ls root/documents/
+field-notes.md
+picnic-supplies.txt
+roundtrip-renamed.bin
+sample-data.bin
+shopping
+$ curl -s "http://127.0.0.1:18080/api/resources/documents/roundtrip-renamed.bin?checksum=sha256" -H "X-Auth: $TOKEN"   # server-side checksum of the renamed file
+{'sha256': '88354b7753dd13fcf6f74aca7e0d70920bcedcb74309a7b0614e0eeae6857995'}
+name: roundtrip-renamed.bin size: 49152
+(uploaded file's sha256 from t06: 88354b7753dd13fcf6f74aca7e0d70920bcedcb74309a7b0614e0eeae6857995)
+$ curl -s -X DELETE "http://127.0.0.1:18080/api/resources/documents/shopping/" -H "X-Auth: $TOKEN" -w "HTTP %{http_code}"   # delete the empty folder
+HTTP 204
+$ ls root/documents/
+field-notes.md
+picnic-supplies.txt
+roundtrip-renamed.bin
+sample-data.bin

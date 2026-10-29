@@ -1,0 +1,49 @@
+$ filebrowser cmds --help
+Command runner management utility.
+
+Usage:
+  filebrowser cmds [command]
+
+Available Commands:
+  add         Add a command to run on a specific event
+  ls          List all commands for each event
+  rm          Removes a command from an event hooker
+
+Flags:
+  -h, --help   help for cmds
+
+Global Flags:
+  -c, --config string     config file path
+  -d, --database string   database path (default "./filebrowser.db")
+
+Use "filebrowser cmds [command] --help" for more information about a command.
+$ filebrowser cmds add --help
+Add a command to run on a specific event.
+
+Usage:
+  filebrowser cmds add <event> <command> [flags]
+
+Flags:
+  -h, --help   help for add
+
+Global Flags:
+  -c, --config string     config file path
+  -d, --database string   database path (default "./filebrowser.db")
+$ filebrowser cmds ls -d filebrowser.db
+2026/10/29 18:42:38 No config file used
+2026/10/29 18:42:38 Using database: /home/hatch/workspace/file-browser-lab-work/filebrowser.db
+$ filebrowser cmds rm after_upload 0 -d filebrowser.db   # remove the test hook
+$ filebrowser config set -d filebrowser.db --shell "bash -c" --disableExec=false
+Shell:                    bash -c  
+  Exec Enabled:              true
+$ filebrowser cmds add after_upload 'echo "hook fired for {FILE} (user {USERNAME}, trigger {TRIGGER})" >> <lab>/hook.log' -d filebrowser.db
+after_upload(0): echo "hook fired for {FILE} (user {USERNAME}, trigger {TRIGGER})" >> /home/hatch/workspace/file-browser-lab-work/hook.log
+$ filebrowser cmds ls -d filebrowser.db
+after_upload(0): echo "hook fired for {FILE} (user {USERNAME}, trigger {TRIGGER})" >> /home/hatch/workspace/file-browser-lab-work/hook.log
+$ filebrowser users update --help | grep -A1 commands
+      --aceEditorTheme string   ace editor's syntax highlighting theme for users
+      --commands strings        a list of the commands a user can execute
+      --dateFormat              use date format (true for absolute time, false for relative)
+$ filebrowser users update admin --commands "echo,ls,pwd" -d filebrowser.db
+ID  Username  Scope  Locale  V. Mode  S.Click  Red. After C/M  Admin  Execute  Create  Rename  Modify  Delete  Share  Download  Pwd Lock
+1   admin     /      en      list     false    false           true   true     true    true    true    true    true   true      false  

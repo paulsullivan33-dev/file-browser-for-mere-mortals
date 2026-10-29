@@ -1,0 +1,120 @@
+$ curl -s -X POST http://127.0.0.1:18080/api/login -H "Content-Type: application/json" -d '{"username":"admin","password":"lab-admin-pass"}'
+token received: 601 characters, begins eyJhbGciOiJI… (a signed JWT; the rest is kept out of this transcript)
+
+$ curl -s http://127.0.0.1:18080/api/resources/ -H "X-Auth: $TOKEN"
+{
+    "items": [
+        {
+            "path": "/alice",
+            "name": "alice",
+            "size": 48,
+            "extension": "",
+            "modified": "2026-10-29T18:40:29.261359555Z",
+            "mode": 2147484152,
+            "isDir": true,
+            "isSymlink": false,
+            "type": ""
+        },
+        {
+            "path": "/documents",
+            "name": "documents",
+            "size": 96,
+            "extension": "",
+            "modified": "2026-10-29T18:40:29.267233258Z",
+            "mode": 2147484152,
+            "isDir": true,
+            "isSymlink": false,
+            "type": ""
+        },
+        {
+            "path": "/photos",
+            "name": "photos",
+            "size": 24,
+            "extension": "",
+            "modified": "2026-10-29T18:40:29.250806482Z",
+            "mode": 2147484152,
+            "isDir": true,
+            "isSymlink": false,
+            "type": ""
+        },
+        {
+            "path": "/recipes",
+            "name": "recipes",
+            "size": 56,
+            "extension": "",
+            "modified": "2026-10-29T18:40:29.246912295Z",
+            "mode": 2147484152,
+            "isDir": true,
+            "isSymlink": false,
+            "type": ""
+        }
+    ],
+    "numDirs": 4,
+    "numFiles": 0,
+    "sorting": {
+        "by": "name",
+        "asc": false
+    },
+    "path": "/",
+    "name": "",
+    "size": 54,
+    "extension": "",
+    "modified": "2026-10-29T18:40:40.334770239Z",
+    "mode": 2147484152,
+    "isDir": true,
+    "isSymlink": false,
+    "type": ""
+}
+$ curl -s http://127.0.0.1:18080/api/resources/documents/ -H "X-Auth: $TOKEN"
+{
+    "items": [
+        {
+            "path": "/documents/field-notes.md",
+            "name": "field-notes.md",
+            "size": 261,
+            "extension": ".md",
+            "modified": "2026-10-29T18:40:29.240079201Z",
+            "mode": 432,
+            "isDir": false,
+            "isSymlink": false,
+            "type": "text"
+        },
+        {
+            "path": "/documents/picnic-supplies.txt",
+            "name": "picnic-supplies.txt",
+            "size": 235,
+            "extension": ".txt",
+            "modified": "2026-10-29T18:40:29.230806481Z",
+            "mode": 432,
+            "isDir": false,
+            "isSymlink": false,
+            "type": "text"
+        },
+        {
+            "path": "/documents/sample-data.bin",
+            "name": "sample-data.bin",
+            "size": 65536,
+            "extension": ".bin",
+            "modified": "2026-10-29T18:40:29.270806483Z",
+            "mode": 432,
+            "isDir": false,
+            "isSymlink": false,
+            "type": "blob"
+        }
+    ],
+    "numDirs": 0,
+    "numFiles": 3,
+    "sorting": {
+        "by": "name",
+        "asc": false
+    },
+    "path": "/documents/",
+    "name": "documents",
+    "size": 96,
+    "extension": "",
+    "modified": "2026-10-29T18:40:29.267233258Z",
+    "mode": 2147484152,
+    "isDir": true,
+    "isSymlink": false,
+    "type": ""
+}

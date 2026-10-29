@@ -1,0 +1,141 @@
+$ python3 ws_command.py admin.token "echo hello-from-the-runner"
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 298, in connect
+    self.sock, addrs = connect(
+                       ^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_http.py", line 145, in connect
+    hostname, port_from_url, resource, is_secure = parse_url(url)
+                                                   ^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_url.py", line 40, in parse_url
+    raise ValueError("url is invalid")
+ValueError: url is invalid
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/ws_command.py", line 14, in <module>
+    ws = websocket.create_connection(url, timeout=10)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 734, in create_connection
+    websock.connect(url, **options)
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 305, in connect
+    raise WebSocketException(
+websocket._exceptions.WebSocketException: Invalid redirect target '/api/command/': url is invalid
+
+$ python3 ws_command.py admin.token "whoami"   # not on the allowlist (echo, ls, pwd)
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 298, in connect
+    self.sock, addrs = connect(
+                       ^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_http.py", line 145, in connect
+    hostname, port_from_url, resource, is_secure = parse_url(url)
+                                                   ^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_url.py", line 40, in parse_url
+    raise ValueError("url is invalid")
+ValueError: url is invalid
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/ws_command.py", line 14, in <module>
+    ws = websocket.create_connection(url, timeout=10)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 734, in create_connection
+    websock.connect(url, **options)
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 305, in connect
+    raise WebSocketException(
+websocket._exceptions.WebSocketException: Invalid redirect target '/api/command/': url is invalid
+$ python3 ws_command.py admin.token "echo hello-from-the-runner"
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/ws_command.py", line 14, in <module>
+    ws = websocket.create_connection(url, timeout=10)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 734, in create_connection
+    websock.connect(url, **options)
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 284, in connect
+    self.handshake_response = handshake(self.sock, url, *addrs, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 73, in handshake
+    status, resp = _get_resp_headers(sock)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 173, in _get_resp_headers
+    raise WebSocketBadStatusException(
+websocket._exceptions.WebSocketBadStatusException: Handshake status 401 Unauthorized -+-+- {'cache-control': 'no-cache, no-store, must-revalidate', 'content-security-policy': "default-src 'self'; style-src 'unsafe-inline';", 'content-type': 'text/plain; charset=utf-8', 'x-content-type-options': 'nosniff', 'date': 'Thu, 29 Oct 2026 18:43:56 GMT', 'content-length': '17'} -+-+- 401 Unauthorized
+
+
+$ python3 ws_command.py admin.token "pwd"
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/ws_command.py", line 14, in <module>
+    ws = websocket.create_connection(url, timeout=10)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 734, in create_connection
+    websock.connect(url, **options)
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 284, in connect
+    self.handshake_response = handshake(self.sock, url, *addrs, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 73, in handshake
+    status, resp = _get_resp_headers(sock)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 173, in _get_resp_headers
+    raise WebSocketBadStatusException(
+websocket._exceptions.WebSocketBadStatusException: Handshake status 401 Unauthorized -+-+- {'cache-control': 'no-cache, no-store, must-revalidate', 'content-security-policy': "default-src 'self'; style-src 'unsafe-inline';", 'content-type': 'text/plain; charset=utf-8', 'x-content-type-options': 'nosniff', 'date': 'Thu, 29 Oct 2026 18:43:56 GMT', 'content-length': '17'} -+-+- 401 Unauthorized
+
+
+$ python3 ws_command.py admin.token "whoami"   # not on the allowlist (echo, ls, pwd)
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/ws_command.py", line 14, in <module>
+    ws = websocket.create_connection(url, timeout=10)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 734, in create_connection
+    websock.connect(url, **options)
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 284, in connect
+    self.handshake_response = handshake(self.sock, url, *addrs, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 73, in handshake
+    status, resp = _get_resp_headers(sock)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 173, in _get_resp_headers
+    raise WebSocketBadStatusException(
+websocket._exceptions.WebSocketBadStatusException: Handshake status 401 Unauthorized -+-+- {'cache-control': 'no-cache, no-store, must-revalidate', 'content-security-policy': "default-src 'self'; style-src 'unsafe-inline';", 'content-type': 'text/plain; charset=utf-8', 'x-content-type-options': 'nosniff', 'date': 'Thu, 29 Oct 2026 18:43:56 GMT', 'content-length': '17'} -+-+- 401 Unauthorized
+
+
+$ python3 ws_command.py alice.token "echo hello-from-alice"   # alice: Execute permission is off
+Traceback (most recent call last):
+  File "/home/hatch/workspace/file-browser-lab-work/ws_command.py", line 14, in <module>
+    ws = websocket.create_connection(url, timeout=10)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 734, in create_connection
+    websock.connect(url, **options)
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_core.py", line 284, in connect
+    self.handshake_response = handshake(self.sock, url, *addrs, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 73, in handshake
+    status, resp = _get_resp_headers(sock)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/file-browser-lab-work/venv/lib/python3.12/site-packages/websocket/_handshake.py", line 173, in _get_resp_headers
+    raise WebSocketBadStatusException(
+websocket._exceptions.WebSocketBadStatusException: Handshake status 401 Unauthorized -+-+- {'cache-control': 'no-cache, no-store, must-revalidate', 'content-security-policy': "default-src 'self'; style-src 'unsafe-inline';", 'content-type': 'text/plain; charset=utf-8', 'x-content-type-options': 'nosniff', 'date': 'Thu, 29 Oct 2026 18:43:56 GMT', 'content-length': '17'} -+-+- 401 Unauthorized
+
+$ python3 ws_command.py admin.token "echo hello-from-the-runner"
+connected: ws://127.0.0.1:18080/api/command/ (token sent in the X-Auth header)
+sent: echo hello-from-the-runner
+received: hello-from-the-runner
+server closed the connection
+
+$ python3 ws_command.py admin.token "pwd"
+connected: ws://127.0.0.1:18080/api/command/ (token sent in the X-Auth header)
+sent: pwd
+received: /home/hatch/workspace/file-browser-lab-work/root
+server closed the connection
+
+$ python3 ws_command.py admin.token "whoami"   # not on the allowlist (echo, ls, pwd)
+connected: ws://127.0.0.1:18080/api/command/ (token sent in the X-Auth header)
+sent: whoami
+received: Command not allowed.
+server closed the connection
+
+$ python3 ws_command.py alice.token "echo hello-from-alice"   # alice: Execute permission is off
+connected: ws://127.0.0.1:18080/api/command/ (token sent in the X-Auth header)
+sent: echo hello-from-alice
+received: Command not allowed.
+server closed the connection
